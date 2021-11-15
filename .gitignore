@@ -2,5 +2,15 @@
 /devel*
 /extras
 /videos
-ByteTrack/*
-/ByteTrack
+#ByteTrack/*
+#/ByteTrack
+
+ByteTrack/assets/*
+ByteTrack/pretrained/*
+ByteTrack/YOLOX_outputs/*
+ByteTrack/build/*
+ByteTrack/datasets/*
+ByteTrack/videos/*
+ByteTrack/bytetrack_x.onnx
+ByteTrack/*.onnx
+ByteTrack/*.pth
