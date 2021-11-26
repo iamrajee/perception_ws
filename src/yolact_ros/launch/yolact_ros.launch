@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+<arg name="image_topic" default="/camera/color/image_raw" />
+<arg name="display_visualization" default="False" />
+<arg name="model_path" default="$(find yolact_ros)/scripts/yolact/weights/yolact_base_54_800000.pth" />
+
+<node pkg="yolact_ros" type="yolact_ros" name="yolact_ros" output="screen">
+  <!-- <param name="model_path" value="$(find yolact_ros)/scripts/yolact/weights/yolact_base_54_800000.pth" /> -->
+  <param name="model_path" value="$(arg model_path)" />
+  <param name="image_topic" value="$(arg image_topic)" />
+  <param name="use_compressed_image" value="False" />
+  <param name="publish_visualization" value="True" />
+  <param name="publish_detecitons" value="True" />
+  <!-- <param name="display_visualization" value="False" /> -->
+  <param name="display_visualization" value="$(arg display_visualization)" />
+</node>
+
+</launch>
