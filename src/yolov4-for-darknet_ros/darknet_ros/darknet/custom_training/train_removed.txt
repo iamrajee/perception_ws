@@ -1,2 +1,0 @@
-custom_training/data/video17_295.JPEG
-custom_training/data/video19_1900.JPEG

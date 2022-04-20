@@ -1,4 +1,0 @@
-__pycache__/
-weights/*.tar
-weights/*.pth
-YOLOX_outputs/

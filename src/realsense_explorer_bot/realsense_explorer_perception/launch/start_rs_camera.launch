@@ -1,0 +1,45 @@
+<launch>
+
+    <arg name="filters"         default=""/>
+    <arg name="align_depth"     default="true"/>
+    <arg name="depth_width"     default="640"/>
+    <arg name="depth_height"    default="480"/>
+    <arg name="color_width"     default="640"/>
+    <arg name="color_height"    default="480"/>
+    <arg name="color_fps"       default="30"/>
+    <arg name="depth_fps"       default="30"/>
+
+<include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="filters"         value="$(arg filters)"/>
+    <arg name="align_depth"     value="$(arg align_depth)"/>
+    <arg name="depth_width"     value="$(arg depth_width)"/>
+    <arg name="depth_height"    value="$(arg depth_height)"/>
+    <arg name="color_width"     value="$(arg color_width)"/>
+    <arg name="color_height"    value="$(arg color_height)"/>
+    <arg name="color_fps"       value="$(arg color_fps)"/>
+    <arg name="depth_fps"       value="$(arg depth_fps)"/>
+</include>
+
+    <!-- Nodelet manager for this pipeline -->
+    <node pkg="nodelet" type="nodelet" args="manager" name="standalone_nodelet" output="screen"/>
+
+    <!-- Convert to point cloud instead of using Realsense Point Cloud Filter -->
+    <node pkg="nodelet" type="nodelet" name="depth_image_proc" args="load depth_image_proc/point_cloud_xyzrgb standalone_nodelet" output="screen">
+
+        <!-- Input: Camera calibration and metadata.  (sensor_msgs/CameraInfo) -->
+        <remap from="rgb/camera_info" to="/camera/color/camera_info"/>
+
+        <!-- Input: Rectified color image. (sensor_msgs/Image) -->
+        <remap from="rgb/image_rect_color" to="/camera/color/image_raw"/>
+
+        <!-- Input: Rectified depth image, registered to the RGB camera. (sensor_msgs/Image) -->
+        <remap from="depth_registered/image_rect" to="/camera/aligned_depth_to_color/image_raw"/>
+
+        <!-- Output: XYZ point cloud. If using PCL, subscribe as PointCloud<PointXYZ>.  (sensor_msgs/PointCloud2)  -->
+        <remap from="depth_registered/points" to="/point_cloud_data"/>
+
+    </node>
+
+</launch>
+
+

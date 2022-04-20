@@ -1,5 +1,0 @@
-classes = 1
-train = /home/rajendra/swarm_ws/src/yolov4-for-darknet_ros/darknet_ros/darknet/train.txt
-valid = /home/rajendra/swarm_ws/src/yolov4-for-darknet_ros/darknet_ros/darknet/test.txt
-names = /home/rajendra/swarm_ws/src/yolov4-for-darknet_ros/darknet_ros/darknet/cfg/drone.names
-backup = /home/rajendra/swarm_ws/src/yolov4-for-darknet_ros/darknet_ros/darknet/weights/backup

@@ -1,5 +1,0 @@
-classes= 1  
-train  = custom_training/train.txt  
-valid  = custom_training/test.txt  
-names = custom_training/obj.names  
-backup = custom_training/weights/backup

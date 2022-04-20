@@ -14,3 +14,32 @@ python3 onnx_inference.py --model ../../bytetrack_x.onnx  --input_shape "800,144
 
 # run ByteTrack_ROS node
 rosrun flocking cleaned_byteTracker.py video -f ~/perception_ws/ByteTrack/exps/example/mot/yolox_x_mix_det.py -c ~/perception_ws/ByteTrack/pretrained/bytetrack_x_mot17.pth.tar --fp16 --fuse --save_result
+
+# rtabmap based realsense_explorer_bot
+https://github.com/fazildgr8/realsense_explorer_bot
+roslaunch realsense_explorer_description robot_bringup.launch
+
+
+# rtabmap perception example
+roslaunch rtabmap_drone_example gazebo.launch  
+roslaunch rtabmap_drone_example slam.launch (add local map in rtabmapviz)  
+roslaunch rtabmap_drone_example rviz.launch  
+rosrun rtabmap_drone_example offboard  
+roslaunch darknet_ros my_yolov3.launch config_file:=yolov4 image:=/r200/camera/color/image_raw 
+(now give navigation goal in rviz) 
+
+
+# =========================== find_object_2d ============================= #
+roscore
+roslaunch usb_cam usb_cam-test.launch
+rosrun find_object_2d find_object_2d image:=usb_cam/image_raw
+
+# din't work?
+roscore
+roslaunch find_object_2d find_object_3d.launch
+roslaunch find_object_2d find_object_3d.launch /camera/rgb/image_rect_color:=/camera/color/image_raw /camera/depth/image_rect_raw:=/camera/depth_registered/image_raw camera/color/camera_info:=/camera/rgb/camera_info
+roslaunch realsense2_camera demo_pointcloud.launch
+
+
+# ==================== OAK-D-Lite ========================================
+roslaunch depthai_examples stereo_node.launch  
